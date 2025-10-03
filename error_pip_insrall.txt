@@ -1,0 +1,124 @@
+Collecting requests==2.31.0 (from -r requirements.txt (line 1))
+  Using cached requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting duckdb==0.9.2 (from -r requirements.txt (line 2))
+  Using cached duckdb-0.9.2.tar.gz (10.7 MB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Installing backend dependencies ... done
+  Preparing metadata (pyproject.toml) ... done
+Collecting pandas==2.1.4 (from -r requirements.txt (line 3))
+  Using cached pandas-2.1.4.tar.gz (4.3 MB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Installing backend dependencies ... done
+  Preparing metadata (pyproject.toml) ... error
+  error: subprocess-exited-with-error
+
+  × Preparing metadata (pyproject.toml) did not run successfully.        
+  │ exit code: 2
+  ╰─> [93 lines of output]
+      + meson setup C:\Users\GFZG2023\AppData\Local\Temp\pip-install-cwo16_54\pandas_4b5de5f2f5674570b5dc3db457efedaf C:\Users\GFZG2023\AppData\Local\Temp\pip-install-cwo16_54\pandas_4b5de5f2f5674570b5dc3db457efedaf\.mesonpy-wgms3nzh\build -Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md --vsenv --native-file=C:\Users\GFZG2023\AppData\Local\Temp\pip-install-cwo16_54\pandas_4b5de5f2f5674570b5dc3db457efedaf\.mesonpy-wgms3nzh\build\meson-python-native-file.ini
+      The Meson build system
+      Version: 1.2.1
+      Source dir: C:\Users\GFZG2023\AppData\Local\Temp\pip-install-cwo16_54\pandas_4b5de5f2f5674570b5dc3db457efedaf
+      Build dir: C:\Users\GFZG2023\AppData\Local\Temp\pip-install-cwo16_54\pandas_4b5de5f2f5674570b5dc3db457efedaf\.mesonpy-wgms3nzh\build        
+      Build type: native build
+      Project name: pandas
+      Project version: 2.1.4
+      Activating VS 17.13.6
+      C compiler for the host machine: cl (msvc 19.43.34810 "Compilateur 
+d'optimisation Microsoft (R) C/C++ versionÿ19.43.34810 pour x64")        
+      C linker for the host machine: link link 14.43.34810.0
+      C++ compiler for the host machine: cl (msvc 19.43.34810 "Compilateur d'optimisation Microsoft (R) C/C++ versionÿ19.43.34810 pour x64")      
+      C++ linker for the host machine: link link 14.43.34810.0
+      Cython compiler for the host machine: cython (cython 0.29.37)      
+      Host machine cpu family: x86_64
+      Host machine cpu: x86_64
+      Program python found: YES (C:\Users\GFZG2023\AppData\Local\Programs\Python\Python313\python.exe)
+      Run-time dependency python found: YES 3.13
+      Build targets in project: 53
+     
+      pandas 2.1.4
+     
+        User defined options
+          Native files: C:\Users\GFZG2023\AppData\Local\Temp\pip-install-cwo16_54\pandas_4b5de5f2f5674570b5dc3db457efedaf\.mesonpy-wgms3nzh\build\meson-python-native-file.ini
+          buildtype   : release
+          vsenv       : True
+          b_ndebug    : if-release
+          b_vscrt     : md
+     
+      Found ninja.EXE-1.13.0.git.kitware.jobserver-pipe-1 at C:\Users\GFZG2023\AppData\Local\Temp\pip-build-env-b9m6noaz\normal\Scripts\ninja.EXE 
+     
+      Visual Studio environment is needed to run Ninja. It is recommended to use Meson wrapper:
+      C:\Users\GFZG2023\AppData\Local\Temp\pip-build-env-b9m6noaz\overlay\Scripts\meson compile -C .
+      + meson compile
+      [1/151] Generating pandas/_libs/khash_primitive_helper_pxi with a custom command
+      [2/151] Generating pandas/_libs/hashtable_func_helper_pxi with a custom command
+      [3/151] Generating pandas/_libs/hashtable_class_helper_pxi with a custom command
+      [4/151] Generating pandas/_libs/algos_common_helper_pxi with a custom command
+      [5/151] Generating pandas/_libs/index_class_helper_pxi with a custom command
+      [6/151] Generating pandas/_libs/intervaltree_helper_pxi with a custom command
+      [7/151] Generating pandas/_libs/sparse_op_helper_pxi with a custom 
+command
+      [8/151] Generating pandas/_libs/algos_take_helper_pxi with a custom command
+      [9/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/base.pyx
+      [10/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/ccalendar.pyx
+      [11/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/dtypes.pyx
+      [12/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/np_datetime.pyx
+      [13/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/nattype.pyx
+      [14/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/conversion.pyx
+      [15/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/timezones.pyx
+      [16/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/fields.pyx
+      [17/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/parsing.pyx
+      [18/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/offsets.pyx
+      [19/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/strptime.pyx
+      [20/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/timestamps.pyx
+      [21/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/timedeltas.pyx
+      [22/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/period.pyx
+      [23/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/indexing.pyx
+      [24/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/arrays.pyx
+      [25/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/vectorized.pyx
+      [26/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslibs/tzconversion.pyx
+      [27/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/hashing.pyx
+      [28/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/missing.pyx
+      [29/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/ops_dispatch.pyx
+      [30/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/properties.pyx
+      [31/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/internals.pyx
+      [32/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/byteswap.pyx
+      [33/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/ops.pyx
+      [34/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/index.pyx
+      [35/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/parsers.pyx
+      [36/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/lib.pyx
+      [37/151] Compiling C object pandas/_libs/tslibs/base.cp313-win_amd64.pyd.p/meson-generated_pandas__libs_tslibs_base.pyx.c.obj
+      FAILED: [code=2] pandas/_libs/tslibs/base.cp313-win_amd64.pyd.p/meson-generated_pandas__libs_tslibs_base.pyx.c.obj
+      "cl" "-Ipandas\_libs\tslibs\base.cp313-win_amd64.pyd.p" "-Ipandas\_libs\tslibs" "-I..\..\pandas\_libs\tslibs" "-I..\..\..\..\pip-build-env-b9m6noaz\overlay\Lib\site-packages\numpy\core\include" "-I..\..\pandas\_libs\include" "-IC:\Users\GFZG2023\AppData\Local\Programs\Python\Python313\Include" "-DNDEBUG" "/MD" "/nologo" "/showIncludes" "/utf-8" "-w" "/O2" "/Gw" "-DNPY_NO_DEPRECATED_API=0" "-DNPY_TARGET_VERSION=NPY_1_21_API_VERSION" "/Fdpandas\_libs\tslibs\base.cp313-win_amd64.pyd.p\meson-generated_pandas__libs_tslibs_base.pyx.c.pdb" /Fopandas/_libs/tslibs/base.cp313-win_amd64.pyd.p/meson-generated_pandas__libs_tslibs_base.pyx.c.obj "/c" pandas/_libs/tslibs/base.cp313-win_amd64.pyd.p/pandas/_libs/tslibs/base.pyx.c  
+      pandas/_libs/tslibs/base.cp313-win_amd64.pyd.p/pandas/_libs/tslibs/base.pyx.c(5397): error C2198: 'int _PyLong_AsByteArray(PyLongObject *,unsigned char *,size_t,int,int,int)'ÿ: pas assez d'arguments pour un appel 
+      pandas/_libs/tslibs/base.cp313-win_amd64.pyd.p/pandas/_libs/tslibs/base.pyx.c(5631): error C2198: 'int _PyLong_AsByteArray(PyLongObject *,unsigned char *,size_t,int,int,int)'ÿ: pas assez d'arguments pour un appel 
+      [38/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/sas.pyx
+      [39/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/reshape.pyx
+      [40/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/interval.pyx
+      [41/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/testing.pyx
+      [42/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/tslib.pyx
+      [43/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/writers.pyx
+      [44/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/window/indexers.pyx
+      [45/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/groupby.pyx
+      [46/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/hashtable.pyx
+      [47/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/algos.pyx
+      [48/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/window/aggregations.pyx
+      [49/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/sparse.pyx
+      [50/151] Compiling Cython source C:/Users/GFZG2023/AppData/Local/Temp/pip-install-cwo16_54/pandas_4b5de5f2f5674570b5dc3db457efedaf/pandas/_libs/join.pyx
+      ninja: build stopped: subcommand failed.
+      Activating VS 17.13.6
+      INFO: automatically activated MSVC compiler environment
+      INFO: autodetecting backend as ninja
+      INFO: calculating backend command to run: C:\Users\GFZG2023\AppData\Local\Temp\pip-build-env-b9m6noaz\normal\Scripts\ninja.EXE
+      [end of output]
+
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+error: metadata-generation-failed
+
+× Encountered error while generating package metadata.
+╰─> See above for output.
+
+note: This is an issue with the package mentioned above, not pip.        
+hint: See above for details.
