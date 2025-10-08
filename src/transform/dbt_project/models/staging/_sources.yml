@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: raw_strava
+    description: "Données brutes extraites de l'API Strava"
+    tables:
+      - name: raw_activities
+        description: "Activités brutes de Strava"
+        columns:
+          - name: id
+            description: "ID unique de l'activité"
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: "Nom de l'activité"
+          - name: sport_type
+            description: "Type de sport (Run, Trail Run, etc.)"
+          - name: start_date
+            description: "Date et heure de début"
+          - name: distance
+            description: "Distance en mètres"
+          - name: moving_time
+            description: "Temps en mouvement en secondes"

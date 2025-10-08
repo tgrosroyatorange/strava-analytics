@@ -1,0 +1,30 @@
+name: 'strava_analytics'
+version: '1.0.0'
+config-version: 2
+
+# Profil à utiliser
+profile: 'strava_analytics'
+
+# Dossiers
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Dossier de sortie
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configuration des modèles
+models:
+  strava_analytics:
+    # Modèles de staging (vues)
+    staging:
+      +materialized: view
+    # Modèles de marts (tables)
+    marts:
+      +materialized: table
