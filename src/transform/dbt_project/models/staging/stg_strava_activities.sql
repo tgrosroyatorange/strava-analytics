@@ -47,8 +47,8 @@ WITH cleaned_activities AS (
         -- Métadonnées
         updated_at
         
-    --FROM {{ source('raw_strava', 'raw_activities') }}
-    FROM main.raw_activities 
+    FROM {{ source('raw_strava', 'raw_activities') }}
+    --FROM main.raw_activities 
     WHERE (lower(sport_type) like '%run%' or lower(sport_type) like '%trail%')
       AND distance > 0  -- Exclure les activités sans distance
       AND moving_time > 0  -- Exclure les activités sans temps

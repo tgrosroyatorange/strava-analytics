@@ -3,6 +3,7 @@ version: 2
 sources:
   - name: raw_strava
     description: "Données brutes extraites de l'API Strava"
+    schema: main
     tables:
       - name: raw_activities
         description: "Activités brutes de Strava"
