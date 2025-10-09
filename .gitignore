@@ -212,3 +212,35 @@ __marimo__/
 *.duckdb.wal
 __pycache__/
 .streamlit/
+
+
+# Données sensibles
+.env
+data/*.duckdb*
+logs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# dbt
+src/transform/dbt_project/target/
+src/transform/dbt_project/dbt_packages/
+src/transform/dbt_project/logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

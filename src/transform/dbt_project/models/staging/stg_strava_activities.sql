@@ -31,10 +31,17 @@ WITH cleaned_activities AS (
         -- Autres métriques
         COALESCE(suffer_score, 0) as suffer_score,
         
-        -- Calculs dérivés
+        -- Calcul de l'allure au format MM.SS (4:30 = 4.30)
         CASE 
-            WHEN moving_time > 0 AND distance > 0 
-            THEN ROUND((moving_time / 60.0) / (distance / 1000.0), 2)
+            WHEN CAST(distance AS FLOAT) > 0 AND CAST(moving_time AS INTEGER) > 0 THEN
+                -- Calcul des secondes par km
+                CASE 
+                    WHEN (CAST(moving_time AS INTEGER) / (CAST(distance AS FLOAT) / 1000)) IS NOT NULL THEN
+                        -- Minutes + (secondes / 100) pour avoir le format MM.SS
+                        FLOOR((CAST(moving_time AS INTEGER) / (CAST(distance AS FLOAT) / 1000)) / 60) + 
+                        (((CAST(moving_time AS INTEGER) / (CAST(distance AS FLOAT) / 1000)) % 60) / 100.0)
+                    ELSE NULL
+                END
             ELSE NULL 
         END as pace_min_per_km,
         
