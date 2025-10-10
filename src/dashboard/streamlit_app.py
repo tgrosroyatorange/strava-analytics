@@ -63,29 +63,59 @@ def format_duration_display(minutes):
     
     return f"{hours}:{mins:02d}"
 
+def run_data_extraction():
+    """Lance l'extraction des données Strava"""
+    try:
+        # Ajouter le chemin vers l'extracteur
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        extract_dir = os.path.join(current_dir, '..', 'extract')
+        sys.path.insert(0, extract_dir)
+        
+        # Importer et exécuter l'extracteur
+        from strava_extractor import main as extract_main
+        extract_main()
+        return True
+    except Exception as e:
+        st.error(f"❌ Erreur lors de l'extraction: {e}")
+        return False
+
+def ensure_data_exists():
+    """S'assure que les données existent"""
+    # Chercher la base de données dans différents emplacements
+    possible_paths = [
+        'data/strava.duckdb',
+        '../../data/strava.duckdb',
+        '../data/strava.duckdb'
+    ]
+    
+    for path in possible_paths:
+        if os.path.exists(path):
+            return True, path
+    
+    # Si aucune base trouvée, proposer l'extraction
+    st.warning("⚠️ Aucune donnée trouvée")
+    
+    if st.button("🔄 Extraire les données Strava"):
+        with st.spinner("Extraction en cours..."):
+            if run_data_extraction():
+                st.success("✅ Extraction terminée!")
+                st.rerun()
+            else:
+                st.error("❌ Échec de l'extraction")
+    
+    return False, None
+
 @st.cache_data(ttl=300)  # Cache pendant 5 minutes
 def load_data():
     """Charge les données depuis DuckDB"""
     try:
-        # Déterminer le chemin absolu vers la DB
-        import os
-        
-        # Obtenir le répertoire du script actuel
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        
-        # Construire le chemin vers la DB (remonte de 2 niveaux : dashboard -> src -> racine)
-        db_path = os.path.join(current_dir, '..', '..', 'data', 'strava.duckdb')
-        db_path = os.path.normpath(db_path)  # Normaliser le chemin
-        
-        st.sidebar.success(f"✅ Base de données connectée")  # Optionnel
-
-        # Vérifier que le fichier existe
-        if not os.path.exists(db_path):
-            st.error(f"❌ Base de données non trouvée : {db_path}")
-            st.error(f"📁 Répertoire actuel : {os.getcwd()}")
-            st.error(f"📁 Répertoire du script : {current_dir}")
+        # Vérifier que les données existent
+        data_exists, db_path = ensure_data_exists()
+        if not data_exists:
             return None, None, None, None
         
+        st.sidebar.success(f"✅ Base de données connectée")
+
         conn = duckdb.connect(db_path)
         
         # Charger les différentes tables
@@ -109,8 +139,8 @@ def load_data():
         
     except Exception as e:
         st.error(f"❌ Erreur lors du chargement des données : {e}")
-        st.error(f"📁 Répertoire de travail : {os.getcwd()}")
         return None, None, None, None
+
 
 def display_kpis(activities_df):
     """Affiche les KPIs principaux"""
