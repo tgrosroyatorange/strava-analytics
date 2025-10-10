@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import pandas as pd
 from datetime import datetime, timedelta
 import os
+import sys
 
 # Configuration de la page
 st.set_page_config(
