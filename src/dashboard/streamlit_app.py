@@ -106,7 +106,7 @@ def ensure_data_exists():
     
     return False, None
 
-@st.cache_data(ttl=300)  # Cache pendant 5 minutes
+#@st.cache_data(ttl=300)  # Cache pendant 5 minutes
 def load_data():
     """Charge les données depuis DuckDB"""
     try:
