@@ -7,51 +7,66 @@ import time
 import sys
 
 def get_strava_credentials():
-    """Récupère les credentials Strava (local ou cloud)"""
+    """Récupère les credentials Strava selon le contexte"""
     
-    # Essayer d'abord Streamlit secrets (cloud) - seulement si streamlit est disponible
+    # 1. D'abord, essayer les variables d'environnement (GitHub Actions, local)
+    client_id = os.getenv('STRAVA_CLIENT_ID')
+    client_secret = os.getenv('STRAVA_CLIENT_SECRET')
+    refresh_token = os.getenv('STRAVA_REFRESH_TOKEN')
+    
+    # Si les variables d'environnement sont présentes, les utiliser
+    if all([client_id, client_secret, refresh_token]):
+        print("🌐 Utilisation des variables d'environnement")
+        return {
+            'client_id': client_id,
+            'client_secret': client_secret,
+            'refresh_token': refresh_token
+        }
+    
+    # 2. Ensuite, essayer Streamlit secrets (seulement si streamlit est disponible)
     try:
         import streamlit as st
-        # Vérifier que nous sommes dans un contexte Streamlit ET que les secrets existent
         if hasattr(st, 'secrets') and 'strava' in st.secrets:
-            print("🌐 Utilisation des secrets Streamlit Cloud")
+            print("📱 Utilisation des secrets Streamlit Cloud")
             return {
                 'client_id': st.secrets['strava']['client_id'],
                 'client_secret': st.secrets['strava']['client_secret'],
                 'refresh_token': st.secrets['strava']['refresh_token']
             }
-    except (ImportError, AttributeError, KeyError) as e:
+    except (ImportError, AttributeError, KeyError):
         # Streamlit non disponible ou secrets non configurés
-        print(f"ℹ️ Streamlit secrets non disponibles: {e}")
         pass
     
-    # Fallback vers variables d'environnement (local)
+    # 3. Enfin, essayer de charger depuis .env (local uniquement)
     try:
         from dotenv import load_dotenv
         load_dotenv()
-        print("🏠 Chargement du fichier .env")
+        print("📁 Tentative de chargement du fichier .env")
+        
+        client_id = os.getenv('STRAVA_CLIENT_ID')
+        client_secret = os.getenv('STRAVA_CLIENT_SECRET')
+        refresh_token = os.getenv('STRAVA_REFRESH_TOKEN')
+        
+        if all([client_id, client_secret, refresh_token]):
+            print("✅ Credentials chargés depuis .env")
+            return {
+                'client_id': client_id,
+                'client_secret': client_secret,
+                'refresh_token': refresh_token
+            }
     except ImportError:
-        print("⚠️ python-dotenv non disponible, utilisation des variables d'environnement système")
+        pass
     
-    # Récupérer depuis les variables d'environnement
-    client_id = os.getenv('STRAVA_CLIENT_ID')
-    client_secret = os.getenv('STRAVA_CLIENT_SECRET')
-    refresh_token = os.getenv('STRAVA_REFRESH_TOKEN')
-    
-    # Vérifier que les credentials sont présents
-    if not all([client_id, client_secret, refresh_token]):
-        raise ValueError(
-            "❌ Credentials Strava manquants. Vérifiez :\n"
-            "- Fichier .env avec : STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, STRAVA_REFRESH_TOKEN\n"
-            "- Ou secrets Streamlit Cloud configurés"
-        )
-    
-    print("✅ Credentials Strava chargés avec succès")
-    return {
-        'client_id': client_id,
-        'client_secret': client_secret,
-        'refresh_token': refresh_token
-    }
+    # Si rien ne fonctionne, lever une erreur explicite
+    raise ValueError(
+        "❌ Credentials Strava non trouvés!\n\n"
+        "Contextes vérifiés :\n"
+        "1. Variables d'environnement (GitHub Actions)\n"
+        "2. Secrets Streamlit Cloud\n"
+        "3. Fichier .env local\n\n"
+        "Vérifiez votre configuration selon votre environnement."
+    )
+
 
 class StravaExtractor:
     def __init__(self):
