@@ -15,6 +15,11 @@ on:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+
+    # ✅ AJOUTER CES PERMISSIONS
+    permissions:
+      contents: write  # Permission d'écrire dans le repo
+      actions: read    # Permission de lire les actions
     
     steps:
     - name: 🔄 Checkout repository
