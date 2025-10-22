@@ -1,0 +1,10 @@
+strava_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../../../data/strava.duckdb'
+      schema: main
+      threads: 1
+      keepalives_idle: 0
+      search_path: main

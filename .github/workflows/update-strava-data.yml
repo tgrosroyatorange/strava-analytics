@@ -47,6 +47,21 @@ jobs:
       run: |
         echo "🔄 Transformation des données..."
         cd src/transform/dbt_project
+        
+        # Vérifier que le profil existe
+        if [ ! -f "profiles.yml" ]; then
+          echo "❌ Fichier profiles.yml manquant"
+          exit 1
+        fi
+        
+        # Vérifier que la base de données existe
+        if [ ! -f "../../../data/strava.duckdb" ]; then
+          echo "❌ Base de données manquante"
+          exit 1
+        fi
+        
+        # Exécuter dbt
+        dbt debug --profiles-dir .
         dbt run --profiles-dir .
         echo "✅ Transformation terminée"
     
@@ -55,6 +70,7 @@ jobs:
         echo "🧪 Tests de qualité..."
         cd src/transform/dbt_project
         dbt test --profiles-dir . || echo "⚠️ Certains tests ont échoué"
+
     
     - name: 📊 Check data quality
       run: |
