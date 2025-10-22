@@ -1,0 +1,33 @@
+name: 🚀 Deploy to Streamlit Cloud
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'data/strava.duckdb*'
+      - 'src/dashboard/**'
+      - 'streamlit_app.py'
+  workflow_dispatch:
+
+jobs:
+  notify-deployment:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🔄 Checkout
+      uses: actions/checkout@v4
+    
+    - name: 📊 Check database size
+      run: |
+        if [ -f "data/strava.duckdb" ]; then
+          size=$(du -h data/strava.duckdb | cut -f1)
+          echo "📊 Taille de la base : $size"
+        else
+          echo "❌ Base de données non trouvée"
+        fi
+    
+    - name: 🚀 Deployment notification
+      run: |
+        echo "🚀 Déploiement automatique vers Streamlit Cloud..."
+        echo "📱 L'app sera mise à jour dans quelques minutes"
+        echo "🔗 URL: https://votre-app.streamlit.app"

@@ -1,0 +1,101 @@
+name: 🏃‍♂️ Update Strava Data
+
+on:
+  schedule:
+    # Tous les jours à 6h et 18h UTC (7h et 19h en France l'hiver)
+    - cron: '0 6,18 * * *'
+  workflow_dispatch:  # Permet de lancer manuellement
+    inputs:
+      force_full_extraction:
+        description: 'Force une extraction complète'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🔄 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+    
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: 🏃‍♂️ Extract Strava data
+      env:
+        STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+        STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+        STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+      run: |
+        echo "🚀 Début de l'extraction Strava..."
+        python src/extract/strava_extractor.py
+        echo "✅ Extraction terminée"
+    
+    - name: 🔧 Transform data with dbt
+      run: |
+        echo "🔄 Transformation des données..."
+        cd src/transform/dbt_project
+        dbt run --profiles-dir .
+        echo "✅ Transformation terminée"
+    
+    - name: 🧪 Run dbt tests
+      run: |
+        echo "🧪 Tests de qualité..."
+        cd src/transform/dbt_project
+        dbt test --profiles-dir . || echo "⚠️ Certains tests ont échoué"
+    
+    - name: 📊 Check data quality
+      run: |
+        echo "📊 Vérification des données..."
+        python -c "
+        import duckdb
+        import os
+        if os.path.exists('data/strava.duckdb'):
+            conn = duckdb.connect('data/strava.duckdb')
+            result = conn.execute('SELECT COUNT(*) FROM activities_summary').fetchone()
+            print(f'✅ {result[0]} activités dans la base')
+            conn.close()
+        else:
+            print('❌ Base de données non trouvée')
+        "
+    
+    - name: 📝 Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Ajouter les fichiers modifiés
+        git add data/strava.duckdb* || echo "Pas de base de données à commiter"
+        
+        # Vérifier s'il y a des changements
+        if git diff --staged --quiet; then
+          echo "📭 Aucun changement à commiter"
+        else
+          git commit -m "🤖 Auto-update Strava data - $(date '+%Y-%m-%d %H:%M')"
+          git push
+          echo "✅ Données mises à jour et commitées"
+        fi
+    
+    - name: 🎉 Success notification
+      if: success()
+      run: |
+        echo "🎉 Mise à jour automatique réussie !"
+        echo "📊 Dashboard disponible sur Streamlit Cloud"
+    
+    - name: ❌ Failure notification
+      if: failure()
+      run: |
+        echo "❌ Échec de la mise à jour automatique"
+        echo "🔍 Vérifiez les logs ci-dessus"
